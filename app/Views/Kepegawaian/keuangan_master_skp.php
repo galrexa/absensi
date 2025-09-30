@@ -1,0 +1,96 @@
+<div class="card">
+    <div class="card-header d-flex">
+        <div class="flex-grow-1"><?=$title?></div>
+        <?php if(return_access_link(['kepegawaian/unit/form'])){?>
+            <a href="<?=site_url('kepegawaian/unit/form')?>" class="btn btn-sm btn-success" title="Tambah unit kerja"><i class="fa fa-plus-circle"></i> Tambah</a>
+        <?php }?>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="example1" class="table table-striped table-hover">
+            	<thead class="">
+            		<tr>
+            			<th width="5%">#</th>
+            			<th width="5%">ID</th>
+                        <th width="55%">NAME</th>
+                        <th width="5%">URUTAN</th>
+            			<th width="20%">STATUS</th>
+            		</tr>
+            	</thead>
+            	<tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<link href="<?=base_url()?>assets/css/datatables.min.css" rel="stylesheet" />
+<script src="<?=base_url()?>assets/js/datatables.min.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		load_data()
+	})
+
+    function load_data()
+    {
+        var t = $('#example1').DataTable({
+            bDestroy: true,
+            bPaginate: true,
+            bLengthChange: true,
+            bFilter: true,
+            bInfo: true,
+            bAutoWidth: false,
+            processing: true,
+            serverSide: true,
+            pageLength: 25,
+            ajax: {
+                url: "<?=site_url('api/kepegawaian/unit')?>",
+                type: "POST",
+                data: {}
+            },
+            columns: [
+                {
+                    data: 'urutan',
+                    className: 'text-center fw-bold',
+                    orderable: false,
+                    render: function(data, type, row, index){
+                        var txt_view = '';
+                            <?php if(return_access_link(['kepegawaian/unit/form'])){?>
+                                txt_view += '<a style="font-size:14pt" class="m-1 text-success" href="<?=site_url('kepegawaian/unit/form?id=')?>'+row.unit_kerja_id+'" title="Edit data"><i class="fa fa-edit"></i></a> '
+                            <?php }?>
+                        return txt_view
+                    }
+                },
+                {
+                    data: 'unit_kerja_id',
+                    className: 'text-center fw-bold',
+                    orderable: true,
+                    render: function(data, type, row, index){
+                        return data
+                    }
+                },
+                {
+                    data: "unit_kerja_name",
+                    className: '',
+                    orderable: true,
+                    render: function(data, type, row){
+                    	return data +'<i class="d-block" style="font-size:9pt;">'+row.unit_kerja_description+'</i>'
+                    }
+                },
+                {
+                    data: 'urutan',
+                    render: function(data, type, row){
+                        return data
+                    }
+                },
+                {
+                    data: 'unit_kerja_status',
+                    render: function(data, type, row){
+                        return row.status_name
+                    }
+                }
+            ],
+            order: [[ 0, 'asc' ]]
+        })
+    }
+</script>

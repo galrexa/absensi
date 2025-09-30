@@ -1,0 +1,1 @@
+2025-09-15 21:25:59: imagepng(/var/www/html/dukungan_pco/public/assets/img/icons/pegawai/QR_Hash_ZjFWVVR6ZEx0L0NoS1RLTHdPMWUvNklCSVo1TldsSXUvaDA0Y1R1OXlOUT0.png): Failed to open stream: Permission denied
