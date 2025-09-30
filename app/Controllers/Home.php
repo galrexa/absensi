@@ -741,7 +741,7 @@ class Home extends BaseController
         $latlng = $this->request->getGet('latlng');
         // $opt_goo = return_value_in_options('google');
         // $data = json_decode(shell_exec("curl -H 'Referer: ".base_url()."' -L -X GET 'https://maps.googleapis.com/maps/api/geocode/json?key=".$opt_goo['maps']."&latlng=".$latlng."'"),true);
-        $data = json_decode(shell_exec("curl -H 'Referer: ".base_url()."' -L -X GET 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCACsIlxK9TSu8iWBg-i85YWSJpUiAm4fw&latlng=".$latlng."'"),true);
+        $data = json_decode(shell_exec("curl -H 'Referer: ".base_url()."' -L -X GET 'https://maps.googleapis.com/maps/api/geocode/json?key=API_KEY&latlng=".$latlng."'"),true);
         if(!empty($data))
         {
             $new_data = $data;
